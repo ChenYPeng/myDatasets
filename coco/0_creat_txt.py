@@ -13,7 +13,7 @@ img_file_path = glob.glob(os.path.join(data_annotated_path, '*.bmp'))
 assert len(json_file_path) == len(img_file_path)
 
 trainval_percent = 1  # No test sample
-train_percent = 0.9
+train_percent = 0.8
 
 num = len(json_file_path)
 list = range(num)
