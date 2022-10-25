@@ -85,9 +85,10 @@ def main():
 
             label_file = labelme.LabelFile(filename=filename)
 
-            base = osp.splitext(osp.basename(filename))[0]
-            img_base_name = base + ".jpg"
-            out_img_file = osp.join(output_dir, "JPEGImages", set, base + ".jpg")
+            base_name = osp.splitext(osp.basename(filename))[0]
+            suffix = ".bmp"
+            img_name = base_name + suffix
+            out_img_file = osp.join(output_dir, "JPEGImages", set, img_name)
             img = labelme.utils.img_data_to_arr(label_file.imageData)
             imgviz.io.imsave(out_img_file, img)
 
@@ -95,7 +96,7 @@ def main():
                 dict(
                     license=0,
                     url=None,
-                    file_name=img_base_name,
+                    file_name=img_name,
                     height=img.shape[0],
                     width=img.shape[1],
                     date_captured=None,
@@ -187,12 +188,12 @@ def main():
                         line_width=2,
                     )
                 out_viz_file = osp.join(
-                    output_dir, "Visualization", set, base + ".jpg"
+                    output_dir, "Visualization", set, base_name + ".jpg"
                 )
                 imgviz.io.imsave(out_viz_file, viz)
 
         with open(out_ann_file, "w") as f:
-            json.dump(data, f)
+            json.dump(data, f, indent=4)
 
 
 if __name__ == '__main__':
